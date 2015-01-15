@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{template "layout/header.html" .}}
+</head>
+<body>
+    {{template "layout/nav.html" .}}
+    <section id="main">
+      <div class="container">
+        <h1>{{.Article.Title}}</h1>
+        <p>Post Date:{{date .Article.Posted "Y-m-d H:i:s"}} Author: {{.Article.Author}}</p>
+        <div class="row">
+          {{str2html .Article.Content}}
+        </div>
+      </div>
+    </section>
+    <footer></footer>      
+    <script script="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+    <script script="text/javascript"></script>
+</body>
+</html>

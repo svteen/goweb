@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{template "layout/root/header.html" .}}
+</head>
+<body>
+    {{template "layout/root/nav.html" .}}
+    <div class="wrapper">
+      <div class="">
+        <div class="col-md-2">
+        {{template "layout/root/side-left.html" .}}
+      </div>
+      <div class="col-md-10">
+        <h1 class="">账户信息</h1>
+        <div class="main">
+          <form id="upload-form" enctype="multipart/form-data" role="form" action="/root/account"method="POST">
+            <div class="form-group">
+                <label for="avatar">头像</label>
+                <div class="account-avatar-wrap">
+                  <img class="account-avatar" src="{{.Avatar}}" alt="Avatar">
+                </div>
+                <div id="filelist"></div>
+                <div id="uploader">
+                  <button id="pickfiles" class="btn btn-default btn-sm">选择文件</button>
+                  <button id="uploadfiles" class="btn btn-success btn-sm">上传文件</button>
+          	    </div>
+             </div>
+          </form>
+          <form id="account-form" role="form" action="/root/account" method="POST">
+              <div class="form-group">
+                <label for="nickname">昵称</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" value="{{.Nickname}}">
+              </div>
+              <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="text" class="form-control" id="email" name="email" value="{{.Email}}">
+              </div>
+              <input id="avatar-path" type="hidden" name="avatar" value="">
+              <button type="submit" class="btn btn-default">保存</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	var uploader = new plupload.Uploader({
+    		runtimes : 'html5,flash,silverlight,html4',
+    		browse_button : 'pickfiles', // you can pass in id...
+    		container: document.getElementById('uploader'), // ... or DOM Element itself
+    		url : '/upload/ajax',
+        file_data_name : 'image',
+    		flash_swf_url : '/static/js/plupload/Moxie.swf',
+    		silverlight_xap_url : '/static/js/plupload/Moxie.xap',
+    		multi_selection : false,
+    		filters : {
+    			max_file_size : '10mb',
+    			mime_types: [
+    				{title : "Image files", extensions : "jpg,gif,png"},
+    				{title : "Zip files", extensions : "zip"}
+    			]
+    		},
+    		init: {
+    			PostInit: function() {
+    				document.getElementById('filelist').innerHTML = '';
+    				document.getElementById('uploadfiles').onclick = function() {
+    					uploader.start();
+    					return false;
+    				};
+    			},
+    			FilesAdded: function(up, files) {
+            document.getElementById('filelist').innerHTML = '';
+    				plupload.each(files, function(file) {
+              document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <div class="progress progress-self"></div></div>';
+              console.log(uploader)
+              if (up.files.length <= 1) {
+                return;
+              }
+              up.removeFile(file);
+    				});
+    			},
+    			UploadProgress: function(up, file) {
+    				document.getElementById(file.id).getElementsByTagName('div')[0].innerHTML = '<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ' + file.percent + '%;">' + file.percent + "%</div>";
+    			},
+    			Error: function(up, err) {
+    				document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+    			},
+          FileUploaded: function(up, file, info) {
+            var json = JSON.parse(info.response);
+            if (json.code == 1) {
+              $('.account-avatar').attr('src', json.path);
+              $('#avatar-path').val(json.path);
+              console.log("Ajax Upload Success!");
+              $.each(up.files, function (i, file) {
+                up.removeFile(file);
+              });
+            }
+          }
+    		}
+    	});
+    	uploader.init();
+    });
+    </script>
+</body>
+</html>

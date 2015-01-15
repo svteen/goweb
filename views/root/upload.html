@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{template "layout/root/header.html" .}}
+</head>
+<body>
+{{template "layout/root/nav.html" .}}
+ <div class="wrapper">
+      <div class="">
+        <div class="col-md-2">
+          {{template "layout/root/side-left.html" .}}
+        </div>
+        <div class="col-md-10">
+          <h1 class="">文章分类</h1>
+          <form id="upload-form" enctype="multipart/form-data" role="form" action="/upload/form" method="POST">
+            <div class="form-group">
+              <label for="image">Password</label>
+              <input type="file" class="form-control" id="image" name="image" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-default">上传</button>
+        </form>
+        </div>
+      </div>
+    </div>    
+    <script script="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+</body>
+</html>

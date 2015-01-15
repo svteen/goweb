@@ -1,0 +1,38 @@
+{{define "msg"}}
+<style>
+    #message{ font-size: 18px; min-width: 265px; *width: 265px; margin: 0px auto; position:absolute ; right: 45%; top: 60px; display: none; z-index: 11; border-radius: 5px; }
+    #message .messageType{ padding:8px 15px; line-height: 30px; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px; }
+    #message .success{ border: 1px solid #fbeed5; background-color: #e95b5f; color: #fbe4e5; }
+    #message .error{ border: 1px solid #eed3d7; background-color: #e95b5f; color: #fbe4e5; }
+</style>
+<div id="message">
+    <div class="messageType success"><span id="icon">✔</span>&nbsp;&nbsp;你妹的，终于成功啦!</div>
+</div>
+<script>
+    var mtypes = "success";
+    safariMessage($("#icon-"+mtypes),mtypes);
+    $('#message').show(); 
+    setTimeout(function() {  
+        $('#message').slideUp("slow"); 
+    }, 3000);
+
+    function safariMessage(obj, str) {
+        var Sys = {}; 
+        var ua = navigator.userAgent.toLowerCase(); 
+        var s;  
+        (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0; 
+        if (Sys.safari){ 
+            obj.css({
+                display:"inline-block", 
+                width: "20px",
+                height: "16px"
+            });
+            if(str=="success"){
+                obj.css("background","url('/image/xiaoxin/checkedIco1.png') no-repeat center");
+            }else{
+               obj.css("background","url('/image/xiaoxin/checkedIco2.png') no-repeat center"); 
+            } 
+        } 
+    }
+</script>
+{{end}}

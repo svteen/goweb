@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{template "layout/root/header.html" .}}
+</head>
+<body>
+    {{template "layout/root/nav.html" .}}
+    <div class="wrapper">
+      <div class="">
+        <div class="col-md-2">
+          {{template "layout/root/side-left.html" .}}
+        </div>
+        <div class="col-md-10">
+          {{range $index, $page := .PagingData}}
+            <div class="post clearfix">
+              <div class="post-cover">
+               <a href=""><img src="/static/img/winter.jpg" alt=""></a>
+              </div>
+              <div class="post-item">
+               <h4><a href="/article/{{$page.Id}}">{{$page.Title}}</a></h4>
+               <p><span class="post-item-date">日期:{{date $page.Posted "Y-m-d H:i:s"}}</span><span class="post-item-author">作者:{{$page.Author}}</span></p>
+               <p>{{$page.Excerpt}}</p>
+               <div class="btn-group pull-right">
+                <a class="btn btn-default" href="/root/post?action=edit&id={{$page.Id}}">编辑文章</a>
+                <a class="btn btn-danger" href="/root/post?action=del&id={{$page.Id}}">删除文章</a>
+               </div>
+              </div>
+            </div>
+          {{end}}
+          <ul class="pagination">
+            {{range $index, $page := .paginator.Pages}}
+            <li{{if $.paginator.IsActive .}} class="active"{{end}}>
+              <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
+            </li>
+            {{end}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+</body>
+</html>

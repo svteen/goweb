@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html ng-app="Tine">
+<head>
+  {{template "layout/header.html" .}}
+  <script script="text/javascript" src="/static/js/angular/angular.min.js"></script>
+  <script script="text/javascript" src="/static/js/angular/angular-route.min.js"></script>
+  <script script="text/javascript" src="/static/js/app.js"></script>
+  <script script="text/javascript" src="/static/js/controllers.js"></script>
+
+</head>
+<body>
+    {{template "layout/nav.html" .}}
+    <div ng-view></div>
+</body>
+</html>

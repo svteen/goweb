@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html id="app" lang="en">
+<head>
+  {{template "layout/header.html" .}}
+  <style>
+    .media-left img{
+      width: 80px;
+      max-height: 80px;
+    }
+    .post {
+      margin: 10px 0;
+    }
+    .post-cover {
+      width: 160px;
+    }
+    .post-cover img {
+      display: block;
+      width: 100%;
+      max-height: 160px;
+    }
+    .post-item {
+      margin-left: 170px;
+    }
+    .post-item-author {
+      margin-left: 20px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+    {{template "layout/nav.html" .}}
+    <section id="home" class="common">
+      <div class="container home-bg">
+        <h1>{{.Userid}}{{.Username}}坑爹{{.IsLogined}}的实验{{.password}}</h1>
+        <div class="media">
+          <a class="media-left" href="#">
+            <img class="img-rounded" src="/static/img/winter.jpg" alt="...">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="album">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            {{.paginator}}
+            {{range $index, $page := .PagingData}}
+            <div class="post clearfix">
+              <div class="post-cover pull-left">
+               <a href=""><img src="/static/img/winter.jpg" alt=""></a>
+              </div>
+              <div class="post-item">
+               <h4><a href="/article/{{$page.Id}}">{{$page.Title}}</a></h4>
+               <p><span class="post-item-date">日期:{{date $page.Posted "Y-m-d H:i:s"}}</span><span class="post-item-author">作者:{{$page.Author}}</span></p>
+               <p>{{$page.Excerpt}}</p>
+              </div>
+            </div>
+            {{end}}
+            <nav>
+              <ul class="pagination">
+                {{range $index, $page := .paginator.Pages}}
+                <li{{if $.paginator.IsActive .}} class="active"{{end}}>
+                  <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
+                </li>
+                {{end}}
+              </ul>
+            </nav>
+          </div>
+          <div class="col-md-3">
+            <div class="col-xs-6 col-md-6">
+              <a href="#" class="thumbnail">
+                <img src="/static/avatar/u=1408923916,1395444739&fm=56.jpg">
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <a href="#" class="thumbnail">
+                <img src="/static/avatar/u=1408923916,1395444739&fm=56.jpg">
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <a href="#" class="thumbnail">
+                <img src="/static/avatar/u=1408923916,1395444739&fm=56.jpg">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script script="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+    {{if .Icontent}} {{.Icontent}} {{end}}
+</body>
+</html>

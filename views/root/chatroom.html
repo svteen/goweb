@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{template "layout/root/header.html" .}}
+</head>
+<body>
+    {{template "layout/root/nav.html" .}}
+    <div class="wrapper">
+      <div class="">
+        <div class="col-md-2">
+        {{template "layout/root/side-left.html" .}}
+      </div>
+      <div class="col-md-10">
+        <h1 class="">聊天室</h1>
+        <div class="main">
+          <form class="form-inline">
+              <div class="col-md-6 form-group">
+                  <input id="sendbox" type="text" class="form-control" onkeydown="if(event.keyCode==13)return false;" required>
+              </div>
+              <button id="sendbtn" type="button" class="btn btn-default">发送</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+    <script script="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+    <script src="/static/js/websocket.js"></script>
+</body>
+</html>

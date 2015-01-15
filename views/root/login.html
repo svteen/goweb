@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{template "layout/root/header.html" .}}
+</head>
+<body style="overflow:hidden">
+    <section id="sigin">
+      <div class="html5_video">
+          <video autoplay loop src="/static/video/cloud.mp4"></video>
+      </div>
+      <div class="container">
+        <div class=" signin-wrap">
+          <form id="signin-form" role="form" action="/login" method="POST">
+            <div class="form-group">
+              <label for="username">User Name</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="forgetmenot" value="1">毋忘我
+              </label>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <script script="text/javascript" src="/static/js/jquery-2.0.3.min.js"></script>
+</body>
+</html>

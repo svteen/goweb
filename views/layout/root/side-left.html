@@ -1,0 +1,10 @@
+<div class="user clearfix">
+  <img  src="/static/img/winter.jpg" alt="avatar">
+</div>
+<ul class="nav side-left-nav">
+  <li {{if .IsPost}}class="active"{{end}}><a href="/root/post">发布文章</a></li>
+  <li {{if .IsCategory}}class="active"{{end}}><a href="/root/category">文章目录</a></li>
+  <li {{if .IsPostList}}class="active"{{end}}><a href="/root/post/list">文章列表</a></li>
+  <li><a href="">待定</a></li>
+  <li {{if .IsChatRoom}}class="active"{{end}}><a href="/root/chatroom">聊天室</a></li>
+</ul>

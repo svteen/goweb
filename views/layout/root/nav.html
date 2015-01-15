@@ -1,0 +1,15 @@
+<header class="navbar navbar-self navbar-static-top" role="navigation">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {{if .IsLogined}}
+          <li><a href="/root/account">Hello, {{.Username}}!</a></li>
+          <li><a href="/login?exit=true">退出</a></li>
+          {{else}}
+          <li {{if .IsLoginP}}class="active"{{end}}><a href="/login">Signin</a></li>
+          {{end}}
+        </ul>
+      </div>
+</header>

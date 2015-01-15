@@ -1,0 +1,24 @@
+<header class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li {{if .IsHome}}class="active"{{end}}>
+            <a href="/">Home{{.hei}}</a>
+          </li>
+          <li {{if .IsAbout}}class="active"{{end}}>
+            <a href="/about">About.me</a>
+          </li>
+          <li {{if .IsLottery}}class="active"{{end}}>
+            <a href="/lottery">Lottery</a>
+          </li>
+          <li>
+            <a href="#/tine">Tine</a>
+          </li>
+          <li>
+            <a href="#/lab">实验室</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+      
+        </ul>
+      </div>
+</header>
